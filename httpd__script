@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "installing packages"
+sudo yum install httpd unzip wget
+echo 
+ sudo systemctl start httpd
+sudo systemctl enable httpd
+echo
+
+echo "starting artifact deployment"
+mkdir -p /tmp/webfiles
+cd /tmp/webfiles
+echo
+wget https://ww.tooplate.com/zip-templates/2098_health.zip > /dev/null
+unzip 2098_health.zip > /dev/null
+sudo cp -r 2098_health/* /var/www/html/
+echo
+systemctl restart httpd
